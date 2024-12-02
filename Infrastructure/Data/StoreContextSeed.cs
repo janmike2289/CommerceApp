@@ -18,11 +18,6 @@ namespace Infrastructure.Data
                 var productsData = await File.ReadAllTextAsync(fullPath);
                 //var products = JsonSerializer.Deserialize<List<Product>>(productsData);
                 var products = JsonConvert.DeserializeObject<List<Product>>(productsData);
-                //foreach (var product in products)
-                //{
-                //    context.Products.Add(product);
-                //}
-                //await context.SaveChangesAsync();
 
                 if (products == null) return;
 
