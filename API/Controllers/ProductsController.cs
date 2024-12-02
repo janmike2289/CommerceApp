@@ -14,10 +14,10 @@ namespace API.Controllers
         //private readonly StoreContext context = context;
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts() 
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts(string? brand, string? type, string? sort) 
         {
             //return await repository.GetProductsAsync(); // not gonna work since ActionResult does not work with IReadOnlyList.
-            return Ok(await repository.GetProductsAsync());
+            return Ok(await repository.GetProductsAsync(brand,type, sort));
         }
 
         [HttpGet ("{id:int}")] // api/products/<whatever id the product uses>
@@ -28,6 +28,18 @@ namespace API.Controllers
             if (product == null) { return NotFound(); }
 
             return product;
+        }
+
+        [HttpGet("brands")]
+        public async Task<ActionResult<IReadOnlyList<string>>> GetBrands()
+        {
+            return Ok(await repository.GetBrandAsync());
+        }
+
+        [HttpGet("types")]
+        public async Task<ActionResult<IReadOnlyList<string>>> GetTypes()
+        {
+            return Ok(await repository.GetTypesAsync());
         }
 
         [HttpPost]
@@ -77,6 +89,7 @@ namespace API.Controllers
             return BadRequest("Problem deleting the product");
         }
 
+        
 
         private bool ProductExist(int id) 
         {

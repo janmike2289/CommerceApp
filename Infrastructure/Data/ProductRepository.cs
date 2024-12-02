@@ -18,25 +18,45 @@ namespace Infrastructure.Data
             context.Products.Remove(product);
         }
 
+        public async Task<IReadOnlyList<string>> GetBrandAsync()
+        {
+            return await context.Products.Select(x => x.Brand).Distinct().ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<string>> GetTypesAsync()
+        {
+            return await context.Products.Select(x => x.Type).Distinct().ToListAsync();
+        }
+
         public async Task<Product> GetProductByIdAsync(int id)
         {
-            //var Product = await context.Products.FindAsync(id);
-
-            //if (ProductExists(id))
-            //{
-            //    return await context.Products.FindAsync(id);
-            //}
-            //else
-            //{
-            //    return null;
-            //}
-
             return await context.Products.FindAsync(id);
         }
 
-        public async Task<IReadOnlyList<Product>> GetProductsAsync()
+        public async Task<IReadOnlyList<Product>> GetProductsAsync(string? brand, string? type, string? sort)
         {
-            return await context.Products.ToListAsync();
+            var query = context.Products.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(brand)) 
+            {
+                query = query.Where(x => x.Brand == brand);
+            }
+
+            if (!string.IsNullOrWhiteSpace(type))
+            {
+                query = query.Where(x => x.Type == type);
+            }
+
+            if(!string.IsNullOrWhiteSpace(sort))
+                query = sort switch //switch expression
+                {
+                    "priceAsc" => query.OrderBy(x => x.Price),
+                    "priceDesc" => query.OrderByDescending(x => x.Price),
+                    _ => query
+                };
+
+
+            return await query.ToListAsync();
         }
 
         public bool ProductExists(int id)
@@ -53,5 +73,6 @@ namespace Infrastructure.Data
         {
             context.Entry(product).State = EntityState.Modified;
         }
+      
     }
 }
