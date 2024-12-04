@@ -2,9 +2,11 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Core.Interfaces;
 
+// ----------------------------------------------Builder (Creates the builder for the web api application)----------------------------------------------------
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
+// ----------------------------------------------Services (Add the services to the application) -------------------------------------
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -21,7 +23,13 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>(); //scoped pe
 //builder.Services.AddTransient<IProductRepository, ProductRepository>(); //scope on the method
 //builder.Services.AddSingleton<IProductRepository, ProductRepository>(); //singleton for the app lifetime
 
+//Adds the services for the generic repository
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+//Build the web api application
 var app = builder.Build();
+
+//-------------------------------------------------------Middleware Pipeline------------------------------------------------------------------------
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -38,7 +46,7 @@ app.MapControllers();
 
 try
 {
-    //create a scope that is outside of the dependency injection, so that we can dispose of it after the app has run
+    //create a scope that is outside the dependency injection, so that we can dispose of it after the app has run
     using var scope = app.Services.CreateScope(); 
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<StoreContext>();
