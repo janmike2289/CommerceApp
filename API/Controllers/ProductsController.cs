@@ -1,5 +1,6 @@
 ﻿using Core.Entity;
 using Core.Interfaces;
+using Core.Specification;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -16,7 +17,13 @@ namespace API.Controllers
             //return await repository.GetProductsAsync(); // not gonna work since ActionResult does not work with IReadOnlyList.
             //return Ok(await repository.GetProductsAsync(brand,type, sort));
 
-            return Ok(await repository.GetAllAsync());
+            var spec = new ProductSpecification(brand, type, sort);
+
+            var products = await repository.ListAsync(spec);
+
+            //return Ok(await repository.GetAllAsync());
+
+            return Ok(products);
         }
 
         [HttpGet ("{id:int}")] // api/products/<whatever id the product uses>
@@ -35,7 +42,9 @@ namespace API.Controllers
             //TODO: Implement method
             
             //return Ok(await repository.GetBrandAsync());
-            return Ok();
+
+            var spec = new BrandListSpecification();
+            return Ok(await repository.ListAsync(spec));
         }
 
         [HttpGet("types")]
@@ -44,7 +53,9 @@ namespace API.Controllers
             //TODO: Implement method
             
             //return Ok(await repository.GetTypesAsync());
-            return Ok();
+
+            var spec = new TypeListSpecification();
+            return Ok(await repository.ListAsync(spec));
         }
 
         [HttpPost]
@@ -93,8 +104,6 @@ namespace API.Controllers
 
             return BadRequest("Problem deleting the product");
         }
-
-        
 
         private bool ProductExist(int id) 
         {

@@ -1,7 +1,6 @@
 ﻿using Core.Entity;
 using Infrastructure.Config;
 using Microsoft.EntityFrameworkCore;
-using System.Net.Http.Headers;
 
 namespace Infrastructure.Data
 {
