@@ -1,29 +1,32 @@
-﻿using Core.Entity;
+﻿using API.RequestHelpers;
+using Core.Entity;
 using Core.Interfaces;
 using Core.Specification;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController(IGenericRepository<Product> repository) : ControllerBase
+
+    public class ProductsController(IGenericRepository<Product> repository) : BaseAPIController
     {
         //private readonly StoreContext context = context;
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts(string? brand, string? type, string? sort) 
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts([FromQuery] ProductSpecParams specParams) 
         {
             //return await repository.GetProductsAsync(); // not gonna work since ActionResult does not work with IReadOnlyList.
             //return Ok(await repository.GetProductsAsync(brand,type, sort));
 
-            var spec = new ProductSpecification(brand, type, sort);
+            var spec = new ProductSpecification(specParams);
 
-            var products = await repository.ListAsync(spec);
+            //var products = await repository.ListAsync(spec);
+            //var count = await repository.CountAsync(spec);
+
+            //var pagination = new Pagination<Product>(specParams.PageIndex, specParams.PageSize, count, products);
 
             //return Ok(await repository.GetAllAsync());
 
-            return Ok(products);
+            return await CreatePagedResult(repository, spec, specParams.PageIndex, specParams.PageSize);
         }
 
         [HttpGet ("{id:int}")] // api/products/<whatever id the product uses>

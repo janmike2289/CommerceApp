@@ -26,4 +26,6 @@ public interface IGenericRepository<T> where T : BaseEntity // where T (generic 
     Task<bool> SaveChangesAsync();
     
     bool Exists(int id);
+
+    Task<int> CountAsync(ISpecification<T> spec);
 }
