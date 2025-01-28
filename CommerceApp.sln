@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "commerceapp.client", "commerceapp.client\commerceapp.client.esproj", "{01EA6E58-59A6-4D42-AEBB-69534E9B98A7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{0E7F9C3A-FB08-4D75-A28D-C8DF6E07A2A7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{02CF7142-6ECE-47DC-A275-1A750634639B}"
@@ -24,12 +22,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{01EA6E58-59A6-4D42-AEBB-69534E9B98A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01EA6E58-59A6-4D42-AEBB-69534E9B98A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01EA6E58-59A6-4D42-AEBB-69534E9B98A7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{01EA6E58-59A6-4D42-AEBB-69534E9B98A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01EA6E58-59A6-4D42-AEBB-69534E9B98A7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01EA6E58-59A6-4D42-AEBB-69534E9B98A7}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{0E7F9C3A-FB08-4D75-A28D-C8DF6E07A2A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E7F9C3A-FB08-4D75-A28D-C8DF6E07A2A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E7F9C3A-FB08-4D75-A28D-C8DF6E07A2A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -52,5 +44,7 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {48FC34DC-966C-431A-9917-A84EA104A377}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal
