@@ -65,8 +65,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "ssl": true,
-            "sslCert": "C:/01 - Work Files/02 - Angular-Core Projects/Angular Projects/CommerceApp/Code/CommerceApp/ssl/localhost.pem",
-            "sslKey": "C:/01 - Work Files/02 - Angular-Core Projects/Angular Projects/CommerceApp/Code/CommerceApp/ssl/localhost-key.pem"
+            "sslCert": "C:/Workfiles/02 - Angular-Core Projects/Angular Projects/CommerceApp/Code/CommerceApp/ssl/localhost.pem",
+            "sslKey": "C:/Workfiles/02 - Angular-Core Projects/Angular Projects/CommerceApp/Code/CommerceApp/ssl/localhost-key.pem"
           },
           "configurations": {
             "production": {

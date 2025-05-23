@@ -7,4 +7,5 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  important: true //sets tailwind important class on all tailwind CSS to allow it to override materials components css.
 }
