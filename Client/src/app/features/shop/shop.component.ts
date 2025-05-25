@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Product } from '../../shared/models/products';
+import { Product } from '../../shared/models/product';
 import { ShopService } from '../../core/services/shop.service';
 import { ProductsItemComponent } from "./products-item/products-item.component";
 import {MatDialog} from '@angular/material/dialog';
@@ -12,6 +12,7 @@ import { ShopParams } from '../../shared/models/shopParams';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Pagination } from '../../shared/models/pagination';
 import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-shop',
@@ -31,17 +32,22 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./shop.component.scss'],
 })
 
+  //let myName = 'John';
+  // // const name = signal(myName);
+
 export class ShopComponent implements OnInit {
 
   private shopService = inject(ShopService);
   private dialogService = inject(MatDialog);
   // products: Product[] = [];
-  products?: Pagination<Product>;
-  sortOptions = [
+  product?: Pagination<Product>;
+  sortOptions = [ 
     {name: 'Alpabetical', value: 'name'},
     {name: 'Price: Low-High', value: 'priceAsc'},
     {name: 'Price: High-Low', value: 'priceDesc'},
   ]
+
+
 
   shopParams = new ShopParams();
   pageSizeOptions = [5,10,15,20]
@@ -49,7 +55,7 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.initializeShop();
   }
-
+  
   // initialize the methods to get the shop products, brands and types
   initializeShop() {
     this.shopService.getBrands();
@@ -57,10 +63,9 @@ export class ShopComponent implements OnInit {
     this.getSortedProducts();
   }
 
-  
   getSortedProducts(){
       this.shopService.getProducts(this.shopParams).subscribe({
-      next: response => this.products = response,
+      next: response => this.product = response,
       error: (error) => console.error(error),
       complete: () => console.log('complete')
     })
@@ -118,3 +123,6 @@ export class ShopComponent implements OnInit {
   }
 
 }
+
+
+

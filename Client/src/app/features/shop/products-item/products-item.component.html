@@ -1,12 +1,12 @@
-@if(products){
-    <mat-card appearance="raised">
-        <img mat-card-image src="{{ products?.pictureURL }}" alt="{{ products?.name }}">
+@if(product){
+    <mat-card appearance="raised" routerLink="/shop/{{product.id}}" class="product-card">
+        <img mat-card-image src="{{product?.pictureURL}}" alt="{{product?.name}}" >
         <mat-card-content class="mt-2">
             <h2 class="text-sm font-semibold uppercase">
-                {{ products?.name }}
+                {{ product?.name }}
             </h2>
             <p class="font-ligth text-sm font color">
-                {{ products?.price  | currency:'PHP':'symbol':'1.2-2' }}
+                {{ product?.price  | currency:'PHP':'symbol':'1.2-2' }}
             </p>
         </mat-card-content>
         <mat-card-actions>
