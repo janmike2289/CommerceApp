@@ -15,7 +15,7 @@ namespace API.Controllers
         [HttpGet("badrequest")]
         public IActionResult GetBadRequest()
         {
-            return Unauthorized("Not a good request");
+            return BadRequest("Not a good request");
         }
 
         [HttpGet("notfound")]
@@ -30,7 +30,7 @@ namespace API.Controllers
             throw new Exception("This is a test exception");
         }
 
-        [HttpGet("validationerror")]
+        [HttpPost("validationerror")]
         public IActionResult GetValidationError(CreateProductDTO product)
         {
             return Ok();
